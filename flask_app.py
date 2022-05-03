@@ -1,16 +1,13 @@
-# WTF PIPS
+# Comandi per installare le librerie
 ## pip install flask
 ## pip install flask_sqlalchemy
 ## pip install mysql-connector
 
-# HOW TO RUN
+# Come avviare il programma
 ## python .\flask_app.py
 
-# PLS REMEMBER
-## You need an happy MySQL running and an user+db created on it
-
-# HAVE FUN
-# Your BM
+# Ricorda
+## Hai bisogno di un db pronto più un user gia completato
 
 from flask import Flask, redirect, render_template, request, url_for
 from flask_sqlalchemy import SQLAlchemy
@@ -19,18 +16,18 @@ import os
 app = Flask(__name__)
 app.config["DEBUG"] = True
 
-# connection string config
+# stringa di connessione con il database
 SQLALCHEMY_DATABASE_URI = "mysql+mysqlconnector://{username}:{password}@{hostname}/{databasename}".format(
-    username="ambientali",
-    password="2wmcq-Td-Lhm/(45",
-    hostname="localhost",
+    username="admin",
+    password="admin1",
+    hostname="%localhost",
     databasename="ambientali",
 )
 app.config["SQLALCHEMY_DATABASE_URI"] = SQLALCHEMY_DATABASE_URI
 app.config["SQLALCHEMY_POOL_RECYCLE"] = 299
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 
-# db engine instantiation
+# inizializzazione database
 db = SQLAlchemy(app)
 
 # data model
@@ -43,7 +40,7 @@ class Sensor(db.Model):
     humidity = db.Column(db.Float)
     pressure = db.Column(db.Float)
 
-# each and every route you web app accepts
+# route per la webapp
 @app.route("/")
 def index():
     return "Eccoti! Sono ruscito a collegarmi a MySQL. Ora puoi usare i comandi 'creadb', 'importa' e 'visualizza'"
